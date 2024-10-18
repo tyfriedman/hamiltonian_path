@@ -38,16 +38,16 @@ def generate_test_cases():
     case_num = 1
     test_cases = ""
     
-    for n in range(3, 13):
-        for i in range(15):
+    for n in range(3, 13): # this is the sizes of graphs that are to be tested
+        for i in range(15): # number of graphs that have a solution
             test_cases += generate_test_case(n, case_num, True)
             case_num += 1
-        for i in range(3):
+        for i in range(3): # number of graphs that have no solution
             test_cases += generate_test_case(n, case_num, False)
             case_num += 1
             
     return test_cases
 
-# Write the test cases to a file
-with open('graph_test_cases.cnf', 'w') as f:
+# write the test cases to a file
+with open('timing_graphs_tfriedma.cnf', 'w') as f:
     f.write(generate_test_cases())

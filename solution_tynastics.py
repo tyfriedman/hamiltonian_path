@@ -6,7 +6,7 @@ from itertools import permutations
 def check_graph(nodes, adjacency_list):
     # generate all possible paths to visit every node once
     possible_paths = permutations(nodes)
-    # print(adjacency_list)
+
     # if len(adjacency_list.keys()) < len(nodes) - 1:
     #     return False
 
@@ -25,9 +25,9 @@ def check_graph(nodes, adjacency_list):
             return True  # found a path
     return False  # no valid path found
 
-
 def generate_graphs():
-    file_name = "./hamiltonian_path_test_cases2.cnf"
+    # file_name = "./hamiltonian_path_test_cases1.cnf"
+    file_name = "./graph_test_cases.cnf"
     with open(file_name, mode ='r') as file:
         csvFile = csv.reader(file)
         csvList = list(csvFile) # convert to list so .pop() can be used
@@ -62,18 +62,25 @@ def generate_graphs():
                             adjacency_list[n2] = set([n1])
                 yield (nodes, adjacency_list, case)
 
-
 def test_graphs():
     graphs = generate_graphs()
+    pretty_print = False
     for nodes, adjacency_list, case in graphs:
         start_time = time.time()
         if (check_graph(nodes, adjacency_list)):
             end_time = time.time()
             elapsed_time = end_time - start_time
-            print(f"Found solution for case {case} with {len(nodes)} nodes in {elapsed_time:0.4f} seconds.")
+
+            if pretty_print:
+                print(f"Case {case:2.0f}, {len(nodes):2.0f} nodes: Found solution.    Elapsed time: {elapsed_time:0.4f} seconds")
+            else:
+                print(f"{case},{len(nodes)},{elapsed_time:0.8f},1")
         else:
             end_time = time.time()
             elapsed_time = end_time - start_time
-            print(f"No solution found for case {case} with {len(nodes)} nodes. Took {elapsed_time:0.4f} seconds.")
+            if pretty_print:
+                print(f"Case {case:2.0f}, {len(nodes):2.0f} nodes: No solution found. Elapsed time: {elapsed_time:0.4f} seconds")
+            else:
+                print(f"{case},{len(nodes)},{elapsed_time:0.8f},0")
 
 test_graphs()

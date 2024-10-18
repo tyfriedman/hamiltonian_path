@@ -22,8 +22,8 @@ def check_graph(nodes, adjacency_list):
     return False  # no valid path found
 
 def generate_graphs():
-    # file_name = "./testing_graphs_tfriedma.cnf"
-    file_name = "./timing_graphs_tfriedma.cnf"
+    file_name = "./testing_graphs_tfriedma.cnf"
+    # file_name = "./timing_graphs_tfriedma.cnf"
     with open(file_name, mode ='r') as file:
         csvFile = csv.reader(file)
         csvList = list(csvFile) # convert to list so .pop() can be used
